@@ -73,14 +73,6 @@ public class TaskController {
 		return new ResponseEntity<>(tasks,HttpStatus.OK);
 	}
 	
-//	@GetMapping("/getByName/{allocatedEmp}")
-//	ResponseEntity<Task> getTaskByEmp(@PathVariable String allocatedEmp) throws TaskNotFoundException{
-//		logger.info("Request to view a task by taskname");
-//		Task task = taskServ.getTaskByEmp(allocatedEmp);
-//		logger.info("Successfully viewed a task by taskname");
-//		return new ResponseEntity<>(task,HttpStatus.OK);
-//	}
-	
 	@GetMapping("/getByEmpId/{employeeId}")
 	ResponseEntity<Task> getByEmpId(@PathVariable long employeeId){
 		logger.info("Request to view a task by empId");

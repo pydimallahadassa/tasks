@@ -26,14 +26,15 @@ public class TaskServiceImpl implements ITaskService {
 		this.taskRepo = taskRepo;
 	}
 	
+	TaskNotFoundException ex = new TaskNotFoundException("Task not found with id: ");
+	
 	@Override
 	public Task addTask(Task task) throws TaskExistsException {
 		Optional<Task> t1 = taskRepo.findByTaskName(task.getTaskName());
 		if(t1.isPresent()) {
 			throw new TaskExistsException("Task already exists with name: "+task.getTaskName());
 		} else {
-			Task newTask = taskRepo.save(task);
-			return newTask;
+			return taskRepo.save(task);
 		}
 	}
 
@@ -49,7 +50,7 @@ public class TaskServiceImpl implements ITaskService {
 			taskRepo.save(updatedTask);
 			return updatedTask;
 		} else {
-			throw new TaskNotFoundException("Task not found with id: "+ taskId);
+			throw ex;
 		}
 	}
 
@@ -61,7 +62,7 @@ public class TaskServiceImpl implements ITaskService {
 			taskRepo.deleteById(taskId);
 			return t1;
 		}else {
-			throw new TaskNotFoundException("Task not found with id: "+ taskId);
+			throw ex;
 		}
 	}
 
@@ -69,17 +70,15 @@ public class TaskServiceImpl implements ITaskService {
 	public Task getTaskById(int taskId) throws TaskNotFoundException {
 		Optional<Task> t1=taskRepo.findById(taskId);
 		if(t1.isPresent()) {
-			Task task = t1.get();
-			return task;
+			return t1.get();
 		}else {
-			throw new TaskNotFoundException("Task not found with id: "+ taskId);
+			throw ex;
 		}
 	}
 
 	@Override
 	public List<Task> getAllTasks() {
-		List<Task> tasks = taskRepo.findAll();
-		return tasks;
+		return taskRepo.findAll();
 	}
 
 	@Override
