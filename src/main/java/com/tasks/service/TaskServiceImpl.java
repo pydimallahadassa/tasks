@@ -3,8 +3,6 @@ package com.tasks.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -83,17 +81,6 @@ public class TaskServiceImpl implements ITaskService {
 		List<Task> tasks = taskRepo.findAll();
 		return tasks;
 	}
-
-//	@Override
-//	public Task getTaskByEmp(String allocatedEmp) throws TaskNotFoundException {
-//		Optional<Task> t1=taskRepo.findByAllocatedEmp(allocatedEmp);
-//		if(t1.isPresent()) {
-//			Task task = t1.get();
-//			return task;
-//		} else {
-//			throw new TaskNotFoundException("Task not found with allocatedEmp: "+ allocatedEmp);
-//		}
-//	}
 
 	@Override
 	public Task getByEmpId(long employeeId) {

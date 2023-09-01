@@ -1,7 +1,6 @@
 package com.tasks.entity;
 
 import java.time.LocalTime;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
